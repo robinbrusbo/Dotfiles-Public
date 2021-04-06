@@ -13,8 +13,7 @@ chmod +x setup.sh
 #+end_src
 
 * Configure
-- ~/.doom.d/config.org
 - ~/.xprofile
   - Change xrandr to suit your monitors
   - Change xinput to match your hardware e.g. your mouse.
-- ~/.config/gtk-3.0/bookmarks
+- ~/.doom.d/config.org
