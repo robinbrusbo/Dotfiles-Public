@@ -259,7 +259,7 @@ mkdir -p "$HOME/.zsh"
 git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
 
 # Emacs
-yay -S --noconfirm emacs ripgrep fd libvterm editorconfig-core-c
+yay -S --noconfirm emacs ripgrep fd
 
 # Packages for Doom Emacs modules
 yay -S --noconfirm editorconfig-core-c hunspell-en_US hunspell-sv libvterm
