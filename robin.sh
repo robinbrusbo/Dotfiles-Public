@@ -11,6 +11,7 @@ yay -S --noconfirm truckersmp-cli
 yay -S --noconfirm zoom
 yay -S --noconfirm polychromatic
 yay -S --noconfirm xf86-input-wacom
+yay -S --noconfirm pavucontrol
 
 # auto login
 # ändra också marhaba /etc/lightdm/lightdm.conf owo

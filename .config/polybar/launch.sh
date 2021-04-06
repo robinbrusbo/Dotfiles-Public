@@ -11,14 +11,17 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 export TRAY_POS=right
-# choose location for temperature
 resolution=$(xdpyinfo | grep -oP 'dimensions:\s+\K\S+')
+
+# CPU temperature
 if [[ $resolution == 13* ]]; then
-	export MOUNT_PATH="/"
-	export HWMON_PATH=/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
-else
+	# Laptop
 	export MOUNT_PATH="/home"
 	export HWMON_PATH=/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
+else
+	# Main computer
+	export MOUNT_PATH="/"
+	export HWMON_PATH=/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
 fi
 
 # polybar bar on both monitors
