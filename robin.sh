@@ -20,3 +20,4 @@ sudo gpasswd -a robban autologin
 
 yay -Rns --noconfirm firefox
 yay -Rns --noconfirm pulseeffects-legacy
+yay -Rns --noconfirm syncthing
