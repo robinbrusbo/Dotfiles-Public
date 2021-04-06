@@ -4,9 +4,13 @@
 
 import datetime
 import os
+import time
 
-timestamp = datetime.datetime.now().time()
 start = datetime.time(6)
-end = datetime.time(22)
-if not start < timestamp < end:
-    os.system("nohup redshift-gtk & disown & rm nohup.out")
+end = datetime.time(21)
+while True:
+    time.sleep(60)
+    timestamp = datetime.datetime.now().time()
+    if not start < timestamp < end:
+        os.system("nohup redshift-gtk & disown & rm nohup.out")
+        break

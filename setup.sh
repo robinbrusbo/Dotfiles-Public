@@ -55,6 +55,11 @@ yay -S --noconfirm firefox
 
 yay -S --noconfirm flameshot simplescreenrecorder peek vlc
 
+# Create screenshots directory if it doesn't exist
+if [ -z "$(ls -A $HOME/Pictures/Wallpapers)" ]; then
+    mkdir -p $HOME/Pictures/Screenshots
+fi
+
 # In case the video size gets a bit big...
 yay -S --noconfirm handbrake
 

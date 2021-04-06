@@ -4,5 +4,6 @@ set -euo pipefail
 read -p "Are you sure? [y/n] "
 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+	yay -Syu
 	/usr/bin/poweroff
 fi

@@ -170,32 +170,11 @@ workspace 10 output $monitor_left
 exec --no-startup-id "betterlockscreen -u Pictures/Wallpapers/"
 bindsym $mod+Pause exec killall picom && betterlockscreen -l dim && picom -b &
 
-# Specific workspaces for certain applications
-assign [class="firefox"] workspace 1
-assign [class="discord"] workspace 2
-assign [title="emacs@"] workspace 3
-assign [class="Steam"] workspace 4
-assign [class="zoom"] workspace 5
-assign [class="Lutris"] workspace 5
-assign [title="PulseEffects"] workspace 9
-for_window [title="Spotify – Web Player"] move container to workspace 10 
-for_window [title="Spotify – My Shazam Tracks"] move container to workspace 10 
-
-# Unique layout
-# Command to generate a new one is...
-# "i3-save-tree --workspace x > ~/.config/i3/workspace-x.json"
-exec --no-startup-id "i3-msg 'workspace 4; append_layout ~/.config/i3/workspace-steam.json; exec --no-startup-id steam-runtime'"
-
-# Start on first workspace
-exec --no-startup-id "i3-msg 'workspace 1'"
-
 # Autostart
 exec --no-startup-id blueman-applet
-exec --no-startup-id discord
+exec --no-startup-id "i3-msg 'workspace 2; exec discord'"
 exec --no-startup-id dunst
-exec --no-startup-id emacs
-exec --no-startup-id firefox
-exec --no-startup-id pulseeffects
+exec --no-startup-id "i3-msg 'workspace 2; exec chromium https://calendar.google.com/calendar/u/0/r?pli=1'"
 
 # Open Activity/Task Manager
 bindsym $mod+Control+Delete exec --no-startup-id kitty --single-instance bpytop
