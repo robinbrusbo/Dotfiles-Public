@@ -106,7 +106,6 @@ session-wrapper=/etc/lightdm/Xsession
 #width=1024
 #height=768
 #depth=8" | sudo tee /etc/lightdm/lightdm.conf
-fi
 
 # PDF Reader
 yay -S --noconfirm zathura zathura-pdf-poppler
