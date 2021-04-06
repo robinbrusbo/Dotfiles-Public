@@ -48,8 +48,8 @@ God bless this individual's [[https://github.com/tecosaur/emacs-config/blob/mast
 
 * User information
 #+BEGIN_SRC elisp
-(setq user-full-name "FlySlime"
-      user-mail-address "ibrabdu@student.chalmers.se")
+(setq user-full-name "Robin Brusbo"
+      user-mail-address "robinbrusbo@gmail.com")
 #+END_SRC
 
 * Font
@@ -71,7 +71,7 @@ God bless this individual's [[https://github.com/tecosaur/emacs-config/blob/mast
 - doom-one
 - doom-zenburn
 #+BEGIN_SRC elisp
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-vibrant)
 (delq! t custom-theme-load-path)
 
 (custom-set-faces!
@@ -216,7 +216,7 @@ To start the calendar on two weeks I used the functions from this [[https://gith
  )
 
 (setq
- evil-escape-key-sequence "jk"                       ; Sequence to exit
+ evil-escape-key-sequence "fd"                       ; Sequence to exit
  evil-escape-unordered-key-sequence t                ; Mash to exit
  evil-want-fine-undo t                               ; Fine tune the undo's, instead of one huge removal
  evil-split-window-below t                           ; Switch to new window

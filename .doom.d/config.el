@@ -17,8 +17,8 @@
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
 
-(setq user-full-name "FlySlime"
-      user-mail-address "ibrabdu@student.chalmers.se")
+(setq user-full-name "Robin Brusbo"
+      user-mail-address "robinbrusbo@gmail.com")
 
 ;; Hack
 ;; JetBrains Mono
@@ -26,7 +26,7 @@
       doom-variable-pitch-font (font-spec :family "JetBrains Mono" :size 16)
       )
 
-(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-vibrant)
 (delq! t custom-theme-load-path)
 
 (custom-set-faces!
@@ -153,7 +153,7 @@
  )
 
 (setq
- evil-escape-key-sequence "jk"                       ; Sequence to exit
+ evil-escape-key-sequence "fd"                       ; Sequence to exit
  evil-escape-unordered-key-sequence t                ; Mash to exit
  evil-want-fine-undo t                               ; Fine tune the undo's, instead of one huge removal
  evil-split-window-below t                           ; Switch to new window
