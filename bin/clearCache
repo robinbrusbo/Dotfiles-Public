@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+rm -rf ~/.cache
+
+if command -v yay &>/dev/null; then
+	yes | yay -Scc
+else
+	yes | sudo pacman -Scc
+fi

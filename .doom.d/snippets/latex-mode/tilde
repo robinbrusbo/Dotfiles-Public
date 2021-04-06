@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Tilde
+# key: ~
+# condition: t
+# --
+\sim $0

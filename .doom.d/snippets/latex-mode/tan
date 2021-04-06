@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: tan
+# key: tan
+# condition: t
+# --
+\tan{$0}

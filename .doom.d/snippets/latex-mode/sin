@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: sin
+# key: sin
+# condition: t
+# --
+\sin{$0}

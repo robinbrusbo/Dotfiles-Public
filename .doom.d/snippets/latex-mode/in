@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: in
+# key: in
+# condition: t
+# --
+\in $0

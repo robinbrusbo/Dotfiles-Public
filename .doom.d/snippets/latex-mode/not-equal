@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Not equal
+# key: !=
+# condition: t
+# --
+\neq $0

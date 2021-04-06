@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Mathcircled
+# key: circle
+# condition: t
+# --
+\mathcircled{$0}

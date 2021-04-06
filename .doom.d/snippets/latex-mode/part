@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: part
+# key: part
+# condition: t
+# --
+\part{${1:Foo}}
+
+$0

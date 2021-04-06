@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: X Square root
+# key: sqrtt
+# condition: t
+# --
+\sqrt[${1:2}]{${2:}}

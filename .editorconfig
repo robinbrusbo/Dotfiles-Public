@@ -1,0 +1,3 @@
+[*.{cpp,h,hpp,c,py,java,cs,hs,xaml,editorconfig}]
+indent_style = space
+indent_size = 4

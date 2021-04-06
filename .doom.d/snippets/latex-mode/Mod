@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Mod
+# key: mod
+# condition: t
+# --
+\Mod{$0}

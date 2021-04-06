@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: dots
+# key: dots
+# condition: t
+# --
+\ldots $0

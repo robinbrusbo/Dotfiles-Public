@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Overbrace
+# key: over
+# condition: t
+# --
+\overbrace{$0}^\text{${1:}}

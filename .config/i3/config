@@ -1,0 +1,223 @@
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# i3-gaps
+for_window [class="^.*"] border pixel 1
+gaps inner 6
+gaps outer 0
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start rofi (dependent on polybar)
+bindsym $mod+d exec --no-startup-id "~/.config/polybar/scripts/launcher.sh"
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Resize
+bindsym $mod+Shift+y resize shrink width 10 px or 10ppt
+bindsym $mod+Shift+u resize shrink height 10 px or 10ppt
+bindsym $mod+Shift+i resize grow height 10 px or 10ppt
+bindsym $mod+Shift+o resize grow width 10 px or 10ppt
+
+# Splitting windows
+bindsym $mod+v split h
+bindsym $mod+s split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+# bindsym $mod+Shift+s layout stacking
+# bindsym $mod+Shift+w layout tabbed
+# bindsym $mod+Shift+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+# bindsym $mod+a focus parent
+
+# focus the child container
+# bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+z workspace prev
+bindsym $mod+x workspace next
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+section workspace number 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r exec --no-startup-id "bash ~/.config/polybar/launch.sh"; restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+Escape exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# General
+client.focused      #4eaff2 #4eaff2 #ffffff #4eaff2 #4eaff2
+client.unfocused    #000000 #000000 #ffffff #000000 #000000
+exec --no-startup-id feh --randomize --bg-scale ~/Pictures/Wallpapers
+exec setxkbmap -layout se
+focus_follows_mouse no
+mouse_warping output
+workspace_auto_back_and_forth yes
+
+# Laptop
+bindsym $mod+F9 exec brightnessctl s 50- intel_backlight
+bindsym $mod+F10 exec brightnessctl s +50 intel_backlight
+
+# Screenshot
+exec --no-startup-id flameshot
+
+set $dateDir $HOME/.config/i3/scripts/dateDirectory.sh
+set $corruptFile $HOME/.config/i3/scripts/corruptScreenshot.sh
+## Region
+bindsym --release $mod+Print exec $dateDir; exec "killall -9 picom; flameshot gui -r > $HOME/Pictures/Screenshots/$(date +%Y-%m)/Screenshot_$(date +%Y%m%d_%H%M%S).png; picom -b"; exec $corruptFile
+## Full
+bindsym --release $mod+Control+Print exec $dateDir; exec flameshot screen -n 0 -p "$HOME/Pictures/Screenshots/$(date +%Y-%m)/" -c
+
+## Old Scrot commands
+# bindsym $mod+Print --release exec $dateDir; exec "scrot -fs $HOME/Pictures/Screenshots/%Y-%m/Screenshot_%Y%m%d_%H%M%S.png -e 'xclip -selection c -t image/png < $f'"
+# bindsym $mod+Shift+Print exec $dateDir; exec "scrot -u $HOME/Pictures/Screenshots/%Y-%m/Screenshot_%Y%m%d_%H%M%S.png -e 'xclip -selection c -t image/png < $f'"
+# bindsym $mod+Control+Print exec $dateDir; exec "scrot $HOME/Pictures/Screenshots/%Y-%m/Screenshot_%Y%m%d_%H%M%S.png -e 'xclip -selection c -t image/png < $f'"
+
+## Old Spectacle commands
+# bindsym $mod+Control+Print exec spectacle -br # Region
+# bindsym $mod+Shift+Print exec spectacle -ba # Active window
+# bindsym $mod+Control+Shift+Print exec spectacle -b # Full
+# bindsym $mod+Print exec xclip -sel clip -t image/png -i $(ls -1tr Pictures/Screenshots/$(date +%Y-%m)/Screenshot_*.png | tail -n 1) # Copy screenshot
+
+# Multi-monitor
+bindsym $mod+o move workspace to output right
+bindsym $mod+y move workspace to output left
+
+set $monitor_left DVI-I-1
+set $monitor_right HDMI-1-1
+workspace 1 output $monitor_left
+workspace 2 output $monitor_right
+workspace 3 output $monitor_left
+workspace 4 output $monitor_left
+workspace 5 output $monitor_left
+workspace 6 output $monitor_left
+workspace 7 output $monitor_left
+workspace 8 output $monitor_left
+workspace 9 output $monitor_left
+workspace 10 output $monitor_left
+
+# Lock-screen
+# KILL PICOM OTHERWISE DUNST NOTIFICATIONS ARE SHOWN ON LOCKSCREEN
+# CHECK THE FOLLOWING ISSUE IN THE FUTURE FOR SOLUTION
+# https://github.com/dunst-project/dunst/issues/697
+exec --no-startup-id "betterlockscreen -u Pictures/Wallpapers/"
+bindsym $mod+Pause exec killall picom && betterlockscreen -l dim && picom -b &
+
+# Specific workspaces for certain applications
+assign [class="firefox"] workspace 1
+assign [class="discord"] workspace 2
+assign [title="emacs@"] workspace 3
+assign [class="Steam"] workspace 4
+assign [class="zoom"] workspace 5
+assign [class="Lutris"] workspace 5
+assign [title="PulseEffects"] workspace 9
+for_window [title="Spotify – Web Player"] move container to workspace 10 
+for_window [title="Spotify – My Shazam Tracks"] move container to workspace 10 
+
+# Unique layout
+# Command to generate a new one is...
+# "i3-save-tree --workspace x > ~/.config/i3/workspace-x.json"
+exec --no-startup-id "i3-msg 'workspace 4; append_layout ~/.config/i3/workspace-steam.json; exec --no-startup-id steam-runtime'"
+
+# Start on first workspace
+exec --no-startup-id "i3-msg 'workspace 1'"
+
+# Autostart
+exec --no-startup-id blueman-applet
+exec --no-startup-id discord
+exec --no-startup-id dunst
+exec --no-startup-id emacs
+exec --no-startup-id firefox
+exec --no-startup-id pulseeffects
+
+# Open Activity/Task Manager
+bindsym $mod+Control+Delete exec --no-startup-id kitty --single-instance bpytop
+
+# Open Ranger
+bindsym $mod+r exec --no-startup-id "kitty --single-instance ranger"
+
+# Open Python REPL
+bindsym $mod+p exec --no-startup-id "kitty --single-instance python"
+
+# Emacs Everywhere
+for_window [title="Emacs Everywhere"] floating enable
+bindsym $mod+e exec --no-startup-id "emacsclient --eval '(emacs-everywhere)'"
+
+# Automatic tiling
+exec_always --no-startup-id autotiling
+
+# Status bar
+exec --no-startup-id "bash ~/.config/polybar/launch.sh"
+
+# Start Redshift if the time is between 22-06
+exec --no-startup-id "python ~/.config/i3/scripts/redshift.py"
+
+# Turn off urgent notifications after autostart
+exec_always --no-startup-id $HOME/.config/i3/scripts/urgentOff.sh

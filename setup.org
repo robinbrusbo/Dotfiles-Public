@@ -1,0 +1,532 @@
+#+AUTHOR: FlySlime
+#+PROPERTY: header-args :tangle setup.sh
+
+* Table of Contents :toc:
+- [[#installation][Installation]]
+- [[#general][General]]
+  - [[#antivirus][Antivirus]]
+  - [[#audio][Audio]]
+  - [[#bluetooth][Bluetooth]]
+  - [[#browser][Browser]]
+  - [[#capture][Capture]]
+  - [[#dhcpcd][dhcpcd]]
+  - [[#display-manager][Display Manager]]
+  - [[#documents][Documents]]
+  - [[#dunst][Dunst]]
+  - [[#fonts][Fonts]]
+  - [[#grub][Grub]]
+  - [[#gtk][GTK]]
+  - [[#hamachi][Hamachi]]
+  - [[#i3][i3]]
+  - [[#kde-applications][KDE applications]]
+  - [[#messaging][Messaging]]
+  - [[#miscellaneous][Miscellaneous]]
+  - [[#mpd][MPD]]
+  - [[#network][Network]]
+  - [[#on-screen-keyboard][On-screen keyboard]]
+  - [[#optimized-kernel][Optimized kernel]]
+  - [[#ranger][Ranger]]
+  - [[#redshift][Redshift]]
+  - [[#backup--sync][Backup & Sync]]
+  - [[#terminal][Terminal]]
+  - [[#text-editor][Text editor]]
+  - [[#torrent][Torrent]]
+  - [[#xorg][Xorg]]
+- [[#laptop][Laptop]]
+  - [[#power-manager-for-laptops][Power manager for laptops]]
+- [[#main-computer][Main computer]]
+  - [[#games][Games]]
+- [[#finalize][Finalize]]
+- [[#useful-links][Useful Links]]
+  - [[#booting-nvidia-gpu-and-intel-igpu][Booting Nvidia GPU and Intel iGPU]]
+
+* Installation
+By using the superior markdown language known as *Org mode* everything written
+here is tangled to =setup.sh=!
+
+- This install assumes that you have logged in to your main user.
+#+BEGIN_SRC sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+read -p "Updating system? [y/n] "
+updating=$REPLY
+read -p "Do you have an Nvidia GPU? [y/n] "
+nvidia=$REPLY
+read -p "Are you installing on a laptop? [y/n] "
+laptop=$REPLY
+read -p "Are you going to be playing games on your computer? [y/n] "
+gaming=$REPLY
+
+if [[ ! $updating =~ ^[Yy]$ ]]; then
+	# Enable locale.gen
+	echo "en_GB.UTF-8 UTF-8
+    en_US.UTF-8 UTF-8" >>locale.gen
+	sudo mv locale.gen /etc/locale.gen
+	sudo locale-gen
+
+	# Enable multilib repository
+	echo "[multilib]
+    Include = /etc/pacman.d/mirrorlist" | sudo tee -a /etc/pacman.conf
+	sudo pacman -Syu --noconfirm
+
+	# Sync time on boot
+	echo "timedatectl set-ntp true" | sudo tee -a /etc/rc.local
+
+	# Install yay, main package manager
+	git clone https://aur.archlinux.org/yay-bin.git
+	cd yay-bin
+	makepkg -si --noconfirm
+	cd ..
+	rm -rf yay-bin
+fi
+#+END_SRC
+
+* General
+** Antivirus
+- There is still a small chance of getting a virus on Linux.
+#+begin_src sh
+yay -S --noconfirm clamav
+#+end_src
+
+** Audio
+- Remember that there is a blacklist feature in PulseEffects.
+#+BEGIN_SRC sh
+# yay -S --noconfirm pipewire pipewire-pulse pipewire-alsa pipewire-jack pavucontrol pulseeffects
+yay -S --noconfirm pulseaudio pulseaudio-alsa pulseaudio-bluetooth pulseeffects-legacy
+#+END_SRC
+
+** Backup & Sync
+#+BEGIN_SRC sh
+# TODO Backup the home directory
+yay -S --noconfirm rsync grsync
+
+# TODO Backup the root directory
+yay -S --noconfirm timeshift
+
+# Sync files between computers
+yay -S --noconfirm syncthing
+sudo systemctl enable syncthing@$USER.service
+#+END_SRC
+
+** Bluetooth
+#+BEGIN_SRC sh
+yay -S --noconfirm bluez bluez-utils blueman
+sudo systemctl enable bluetooth.service
+#+END_SRC
+
+** Browser
+#+BEGIN_SRC sh
+yay -S --noconfirm firefox
+#+END_SRC
+
+** Capture
+- Anything related to input/output devices or images/videos.
+#+BEGIN_SRC sh
+yay -S --noconfirm flameshot simplescreenrecorder peek vlc
+
+# In case the video size gets a bit big...
+yay -S --noconfirm handbrake
+
+# Webcam preview
+yay -S --noconfirm cheese
+
+# Alternative to paint.net
+yay -S --noconfirm pinta
+
+# Noise suppression
+yay -S --noconfirm noisetorch-bin
+
+# Taking pictures in org-mode
+yay -S --noconfirm scrot
+
+# Download videos
+yay -S --noconfirm clipgrab
+
+# Configure mouse settings
+yay -S --noconfirm piper
+#+END_SRC
+
+** Display/Login Manager
+#+BEGIN_SRC sh
+yay -S --noconfirm lightdm gdk-pixbuf2
+sudo systemctl enable lightdm
+
+# Greeter/theme for lightdm
+yay -S --noconfirm lightdm-gtk-greeter
+# yay -S --noconfirm lightdm-webkit-theme-aether
+
+# Fix black screen if computer boots too fast
+echo "[LightDM]
+logind-check-graphical=true
+run-directory=/run/lightdm
+
+[Seat:*]
+session-wrapper=/etc/lightdm/Xsession
+
+[XDMCPServer]
+#enabled=false
+#port=177
+#listen-address=
+#key=
+#hostname=
+
+[VNCServer]
+#enabled=false
+#command=Xvnc
+#port=5900
+#listen-address=
+#width=1024
+#height=768
+#depth=8" | sudo tee /etc/lightdm/lightdm.conf
+fi
+#+END_SRC
+
+** Documents
+#+BEGIN_SRC sh
+# PDF Reader
+yay -S --noconfirm zathura zathura-pdf-poppler
+
+# Set A4 as default papersize
+if [[ ! $updating =~ ^[Yy]$ ]]; then
+    echo 'a4' | sudo tee -a /etc/papersize
+fi
+
+# Libreoffice, Microsoft Office but for Linux!
+yay -S --noconfirm libreoffice-fresh
+#+END_SRC
+
+** Dunst
+- Notification daemon
+#+BEGIN_SRC sh
+yay -S --noconfirm dunst
+#+END_SRC
+
+** Fonts
+#+BEGIN_SRC sh
+# Fonts take long to install, only needed once
+if [[ ! $updating =~ ^[Yy]$ ]]; then
+    # Windows fonts
+    yay -S --noconfirm ttf-ms-win10-auto
+    # Patched fonts for ranger and other stuff
+    yay -S --noconfirm nerd-fonts-complete
+fi
+yay -S --noconfirm wqy-zenhei ttf-jetbrains-mono ttf-hack ttf-font-awesome
+#+END_SRC
+
+** Grub
+- If using an EFI system, install =efibootmgr=.
+- Although this was the correct way to do it before, it might not be it when you are reading this. Check [[https://wiki.archlinux.org/index.php/GRUB][Arch Wiki]].
+- Commented out since you have probably already booted into your system...
+#+BEGIN_SRC sh
+# yay -S --noconfirm grub os-prober intel-ucode efibootmgr
+
+## EFI:
+# sudo grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+
+## Boot:
+## /dev/sdX is the disk (not partition) where GRUB should be installed
+# sudo grub-install --target=i386-pc /dev/sdX
+
+# sudo grub-mkconfig -o /boot/grub/grub.cfg
+#+END_SRC
+
+** GTK
+#+BEGIN_SRC sh
+# Theme
+rm -rf $HOME/.themes/Dracula
+git clone https://github.com/dracula/gtk $HOME/.themes/Dracula
+
+# File chooser for GTK
+gsettings set org.gtk.Settings.FileChooser show-hidden true
+gsettings set org.gtk.Settings.FileChooser sort-directories-first true
+gsettings set org.gtk.Settings.FileChooser sort-column 'name'
+#+END_SRC
+
+** Hamachi
+- Use ~$HOME/bin/startHamachi~ to enable Hamachi for one session.
+#+begin_src sh
+# yay -S logmein-hamachi haguichi
+# echo "Ipc.User flyslime
+# Setup.AutoNick FlySlime" | sudo tee -a /var/lib/logmein-hamachi/h2-engine-override.cfg
+#+end_src
+
+** i3
+#+BEGIN_SRC sh
+yay -S --noconfirm i3-gaps feh tldr wmctrl
+#+END_SRC
+
+*** Autotiling
+#+begin_src sh
+yay -S --noconfirm python-i3ipc autotiling
+#+end_src
+
+*** Compositor
+#+BEGIN_SRC sh
+yay -S --noconfirm picom
+#+END_SRC
+
+*** Rofi
+#+begin_src sh
+yay -S --noconfirm rofi papirus-icon-theme
+#+end_src
+
+*** i3lock
+- See [[https://github.com/pavanjadhaw/betterlockscreen][GitHub]]
+#+BEGIN_SRC sh
+yay -S --noconfirm betterlockscreen
+
+cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc $HOME/.config
+
+# If your Pictures/Wallpapers folder is empty, download a wallpaper
+if [ -z "$(ls -A $HOME/Pictures/Wallpapers)" ]; then
+    mkdir -p $HOME/Pictures/Wallpapers
+    yay -S --noconfirm curl wget
+    curl https://images.wallpaperscraft.com/image/deer_art_vector_134088_1920x1080.jpg > $HOME/Pictures/Wallpapers/deer_art_vector_1920x1080.jpg
+fi
+
+# Sets lockscreen
+betterlockscreen -u $HOME/Pictures/Wallpapers
+#+END_SRC
+
+*** Polybar
+#+BEGIN_SRC sh
+yay -S --noconfirm polybar lm_sensors gsimplecal inxi
+sudo sensors-detect --auto
+#+END_SRC
+
+** KDE applications
+#+BEGIN_SRC sh
+yay -S --noconfirm kdenlive
+#+END_SRC
+
+** Messaging
+- Garbage application, but everyone uses it
+- Make sure to remove ~libappindicator-gtk3~
+#+BEGIN_SRC sh
+yay -S --noconfirm discord_arch_electron
+
+# Pass audio through applications, enables audio for discord screen-sharing
+yay -S --noconfirm soundux
+
+# End-to-end messaging app for Android
+yay -S --noconfirm signal-desktop
+#+END_SRC
+
+** Miscellaneous
+- Smaller applications/games, nothing "important"
+#+BEGIN_SRC sh
+# Fun typing game
+yay -S --noconfirm typespeed
+
+# I use arch btw
+yay -S --noconfirm neofetch
+
+# Color text with lolcat =w=
+yay -S --noconfirm lolcat
+
+# Inspiring quotes for the day
+yay -S --noconfirm cowfortune
+#+END_SRC
+
+** MPD
+- Check [[https://www.youtube.com/watch?v=4WQx-_rNNNI][this video]] out when I get Spotify Premium (someday...)
+#+begin_src sh
+# yay -S --noconfirm mpd mopidy mopidy-spotify mopidy-mpd ncmpcpp
+#+end_src
+
+** Network
+- Might need to check [[https://wiki.archlinux.org/index.php/NetworkManager][NetworkManager]].
+- Don't install =network-manager-applet= as it installs =libappindicator-gtk3=. Bad for Discord!
+#+BEGIN_SRC sh
+yay -S --noconfirm networkmanager nm-connection-editor networkmanager-dmenu-git
+sudo systemctl enable NetworkManager.service
+#+END_SRC
+
+** On-screen keyboard
+- Never know when you need one!
+#+begin_src sh
+yay -S --noconfirm onboard
+#+end_src
+
+** Optimized kernel
+#+BEGIN_SRC sh
+## Nvidia Users
+if [[ $nvidia =~ ^[Yy]$ ]]; then
+	yay -S --noconfirm nvidia nvidia-dkms nvidia-utils lib32-nvidia-utils nvidia-settings
+fi
+
+## AMD Users
+# not added yet
+
+# --noconfirm turned off for different CPUs
+yay -S mesa lib32-mesa
+
+# Optimized kernel
+yay -S --noconfirm linux-zen linux-zen-headers
+
+# Refresh grub so it detects the new kernel
+if [ -z "$(ls -A /boot/grub)" ]; then
+	sudo mkdir /boot/grub
+fi
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+#+END_SRC
+
+** Ranger
+#+BEGIN_SRC sh
+yay -S --noconfirm ranger w3m atool unzip unrar zip
+
+# To show icons in ranger
+rm -rf $HOME/.config/ranger/plugins/ranger_devicons
+git clone https://github.com/alexanderjeurissen/ranger_devicons $HOME/.config/ranger/plugins/ranger_devicons
+
+# To drag and drop files from Ranger
+yay -S --noconfirm dragon-drag-and-drop
+#+END_SRC
+
+** Redshift
+- Take care of your eyes!
+#+BEGIN_SRC sh
+yay -S --noconfirm redshift python-gobject
+#+END_SRC
+
+** Terminal
+- [[https://github.com/sindresorhus/pure][Pure]] is a pretty good looking prompt for zsh
+#+BEGIN_SRC sh
+yay -S --noconfirm kitty exa tree
+
+# Theme for kitty
+curl -o $HOME/.config/kitty/snazzy.conf https://raw.githubusercontent.com/connorholyday/kitty-snazzy/master/snazzy.conf
+
+# Task manager
+yay -S --noconfirm bpytop
+
+# Shell
+yay -S --noconfirm zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions
+if [[ ! $updating =~ ^[Yy]$ ]]; then
+    # Make zsh main shell
+	chsh -s /bin/zsh
+fi
+
+# Pure install
+rm -rf "$HOME/.zsh"
+mkdir -p "$HOME/.zsh"
+git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+#+END_SRC
+
+** Text editor
+- Emacs is the superior editor. Especially +Spacemacs+ Doom Emacs.
+#+BEGIN_SRC sh
+# Emacs
+yay -S --noconfirm emacs ripgrep fd libvterm editorconfig-core-c
+
+# Packages for Doom Emacs modules
+yay -S --noconfirm editorconfig-core-c hunspell-en_US hunspell-sv libvterm
+
+# C/C++
+yay -S --noconfirm clang cmake
+
+# Emacs Everywhere
+yay -S --noconfirm xclip xdotool
+
+# Grammar
+yay -S --noconfirm languagetool
+
+# bash
+## Formatter
+yay -S --noconfirm shfmt
+
+# Python
+yay -S --noconfirm python-pip
+## LSP
+pip install 'python-language-server[all]'
+## Formatter
+pip install black
+
+# Java
+yay -S --noconfirm jdk-openjdk java-openjfx
+## LSP
+# yay -S --noconfirm jdtls
+
+# # Haskell
+# yay -S stack ncurses5-compat-libs ghc haskell-language-server-bin
+# stack setup
+# ## Install Hoogle (Google but for Haskell!)
+# stack install hoogle
+# ## Formatter
+# stack install brittany
+# ## Install QuickCheck
+# yay -S haskell-quickcheck
+
+# LaTeX
+if [[ ! $updating =~ ^[Yy]$ ]]; then
+	yay -S --noconfirm texlive-most biber
+fi
+
+# Tools for LaTeX
+yay -S --noconfirm ghostscript mathpix-snipping-tool inkscape textext
+
+# Doom Emacs
+if [ -z "$(ls -A $HOME/.emacs.d)" ]; then
+	git clone --depth 1 https://github.com/hlissner/doom-emacs $HOME/.emacs.d
+	$HOME/.emacs.d/bin/doom install
+fi
+#+END_SRC
+
+** Torrent
+- Using a torrent client doesn't necessarily mean I'm a pirate... Right?
+#+BEGIN_SRC sh
+yay -S --noconfirm deluge deluge-gtk
+#+END_SRC
+
+** Xorg
+#+BEGIN_SRC sh
+yay -S --noconfirm xorg
+#+END_SRC
+
+* Laptop 
+- Used for work and school
+** Power manager for laptops
+- Not sure if =xfce4-power-manager= is needed for laptops.
+#+BEGIN_SRC sh
+if [[ $laptop =~ ^[Yy]$ ]]; then
+    yay -S --noconfirm tlp powertop
+    sudo systemctl enable tlp.service
+fi
+#+END_SRC
+
+* Main computer 
+- Used for gaming and work
+** Games
+#+BEGIN_SRC sh
+if [[ $gaming =~ ^[Yy]$ ]]; then
+	# --noconfirm turned off due to GPU driver selection
+	yay -S steam
+	yay -S --noconfirm gamemode lib32-gamemode
+	yay -S --noconfirm protontricks
+	yay -S --noconfirm obs-studio
+	yay -S --noconfirm lutris
+	yay -S --noconfirm wine-staging winetricks
+	# make cpu run at perfomance mode
+	yay -S --noconfirm cpupower
+	echo "cpupower frequency-set -g performance" | sudo tee -a /etc/rc.local
+	# fps/cpu/gpu tracker
+	yay -S --noconfirm mangohud lib32-mangohud
+	# fps limiter
+	yay -S --noconfirm libstrangle-git
+    if [[ ! $updating =~ ^[Yy]$ ]]; then
+        echo "*                hard    nofile          1048576" | sudo tee -a /etc/security/limits.conf
+        echo "*                soft    nofile          1048576" | sudo tee -a /etc/security/limits.conf
+    fi
+fi
+#+END_SRC
+
+* Finalize
+- Clear cache after install and remove unnecessary packages.
+#+BEGIN_SRC sh
+$HOME/bin/clearCache; $HOME/bin/clearOrphans
+#+END_SRC
+
+* Useful Links
+** Booting Nvidia GPU and Intel iGPU
+- Needed to figure this out since I couldn't easily activate "coolbits" and overclock my GPU without turning off my Intel GPU -> no second monitor. See this [[https://askubuntu.com/questions/593938/how-to-run-both-intel-and-nvidia-graphics-card-driver-on-dual-monitor-setup][link that fixed my problem]].

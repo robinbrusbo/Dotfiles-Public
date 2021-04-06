@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Parentheses
+# key: par
+# condition: t
+# --
+($0)

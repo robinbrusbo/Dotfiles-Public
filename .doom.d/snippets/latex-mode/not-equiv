@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Not Equiv
+# key: !===
+# condition: t
+# --
+\not\equiv $0

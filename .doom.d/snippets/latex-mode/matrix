@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Matrices
+# key: mat
+# condition: t
+# type: command                                               
+# --
+(setq env (yas/choose-value '("matrix" "pmatrix" "bmatrix" "Bmatrix" "vmatrix" "Vmatrix" "smallmatrix")))
+
+(insert "\\begin{"env"}\n")
+(TeX-fold-buffer)
+(let ((width (read-number "Matrix width?" 3))
+(height (read-number "Matrix height?" 3))
+(snippet-text ""))
+(dotimes (i height)
+(dotimes (j width)
+(setq snippet-text (format "%s $${%d:m%d%d}$ %s"
+snippet-text
+(1+ (+ (* width i) j))
+i
+j
+(if (= j (1- width))
+(if (/= i (1- height)) "\\\\\\" "")
+"&"))))
+(setq snippet-text (format "%s\n" snippet-text)))
+(yas/expand-snippet (format "%s\\end{%s}" snippet-text env)))

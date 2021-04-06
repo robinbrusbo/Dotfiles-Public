@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Underline
+# key: un
+# condition: t
+# --
+\underline{${0:}}

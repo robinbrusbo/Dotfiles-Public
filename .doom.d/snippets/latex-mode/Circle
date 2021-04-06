@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Circle / Dot for Function Composition
+# key: circ
+# condition: t                              
+# --
+\circ $0

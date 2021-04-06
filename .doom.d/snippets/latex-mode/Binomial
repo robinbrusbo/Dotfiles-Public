@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: binomial
+# key: bin
+# condition: t  
+# --
+\binom{$1}{$2}

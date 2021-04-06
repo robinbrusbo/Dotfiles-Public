@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Footnote
+# key: foot
+# condition: t
+# --
+\footnote{$0}

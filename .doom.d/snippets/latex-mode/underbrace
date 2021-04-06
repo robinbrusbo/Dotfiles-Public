@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Underbrace
+# key: under
+# condition: t               
+# --
+\underbrace{$0}_\text{${1}}

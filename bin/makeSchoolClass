@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+uniFolder="$HOME/Sync/University/Preamble"
+read -p "Is this the correct directory for your preamble? $uniFolder [y/n] "
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+	read -p "Enter a new directory " uniFolder
+fi
+
+# Ask questions for titlepage.tex
+read -p "What is the course name? " title
+read -p "What is the teacher's name? " teacher
+read -p "What is the course code? " code
+
+# Replace spaces with dash
+dirname=${title// /-}
+
+mkdir $dirname
+cd $dirname
+mkdir graphics
+mkdir code
+mkdir tentor
+
+# Make main.tex
+echo "\documentclass[a4paper, 12pt]{report}
+\input{$uniFolder/preamble.tex}
+\addbibresource{$uniFolder/literature.bib}
+
+\begin{document}
+    \input{titlepage.tex}
+    \tableofcontents
+
+    \input{month1.tex}
+    \input{month2.tex}
+
+    \printbibliography[heading=none]
+\end{document}" >>main.tex
+
+# Make titlepage.tex
+echo "\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+
+        \Huge
+        \textbf{$title}
+
+        \vspace{0.5cm}
+
+        \LARGE
+        Examinator: $teacher
+
+        \vspace{1.5cm}
+
+        \textbf{Ibrahim Abdulhussein}
+
+        \vfill
+
+        Anteckningar för en kurs som krävs för en kandidatexamen
+
+        \vspace{0.8cm}
+        \includegraphics[width=0.4\textwidth]{$uniFolder/chalmers.png}
+
+        \Large
+        Institutionen för Data- och Informationsteknik \\\\
+        Chalmers Tekniska Högskola \\\\
+        Kurskod: $code
+    \end{center}
+\end{titlepage}" >>titlepage.tex
+
+# Make month files
+echo "\part{Vecka 1-4}
+" >>month1.tex
+
+echo "\part{Vecka 5-8}
+" >>month2.tex

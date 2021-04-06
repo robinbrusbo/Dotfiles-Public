@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Times
+# key: times
+# condition: t
+# --
+\times $0

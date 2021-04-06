@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Picture with a Caption
+# key: piccap
+# condition: t
+# --
+\begin{figure}[H]
+  \centering \includegraphics[width=$1\textwidth]{graphics/$2.png}
+  \caption{$0}
+\end{figure}

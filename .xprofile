@@ -1,0 +1,28 @@
+# Two monitors
+xrandr --output DVI-I-1 --mode 1920x1080 --rate 144 --auto --primary --output HDMI-1-1 --rate 60 --auto --right-of DVI-I-1
+
+# Temporary file with xinput list
+echo $(xinput list) >> tmp
+
+# Proper DPI gaming
+if grep -q "Logitech G502" tmp; then
+    xinput set-prop "pointer:Logitech G502" "libinput Accel Speed" 0
+    xinput set-prop "pointer:Logitech G502" "libinput Accel Profile Enabled" 0, 1
+fi
+
+# Write while typing touchpad
+if grep -q "SynPS/2 Synaptics TouchPad" tmp; then
+    xinput set-prop "SynPS/2 Synaptics TouchPad" 334 0
+fi
+
+# Wacom drivers
+if grep -q "Wacom Intuos S Pen stylus" tmp; then
+    xsetwacom set "Wacom Intuos S Pen stylus" MapToOutput HEAD-0
+    xsetwacom set "Wacom Intuos S Pen stylus" Area 0 0 13200 7425
+fi
+
+# Clean up
+rm tmp
+
+# Start compositor
+picom -b &

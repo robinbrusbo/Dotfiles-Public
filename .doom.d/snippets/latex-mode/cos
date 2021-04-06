@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: cos
+# key: cos
+# condition: t
+# --
+\cos{$0}

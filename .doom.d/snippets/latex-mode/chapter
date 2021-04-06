@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: chapter
+# uuid: cha
+# key: cha
+# condition: t     
+# --
+\chapter{${1:Foo}}
+\label{cha:${2:foo}}
+
+$0

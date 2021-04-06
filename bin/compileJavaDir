@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# JAVA AND JAVAFX
+# Compiles an entire java project and runs the selected java file
+
+file=$1
+file="${file%%.*}"
+dir=${PWD##*/}
+run=$dir"."$file
+
+javac --module-path /usr/lib/jvm/default/lib --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media $(find . -name '*.java')
+cd ..
+java --module-path /usr/lib/jvm/default/lib --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media $run
+
+find . -name '*.class' -delete

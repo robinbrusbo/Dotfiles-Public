@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: hspace
+# key: space
+# condition: t
+# --
+\hspace{${1:5mm}}

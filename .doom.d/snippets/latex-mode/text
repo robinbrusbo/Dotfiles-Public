@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Text
+# key: txt
+# condition: t
+# --
+\text{${1:Foo}}

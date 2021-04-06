@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Input code
+# key: incode
+# condition: t                           
+# --
+\lstinputlisting[language=$1]{code/${2:filename}}

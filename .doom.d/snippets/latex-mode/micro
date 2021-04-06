@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Micro
+# key: micro
+# condition: t
+# --
+\mu

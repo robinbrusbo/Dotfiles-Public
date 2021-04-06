@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: infinite
+# key: inf
+# condition: t
+# --
+\infty

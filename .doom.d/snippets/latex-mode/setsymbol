@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Set symbol
+# key: setnum
+# condition: t
+# --
+\mathbb{$1}

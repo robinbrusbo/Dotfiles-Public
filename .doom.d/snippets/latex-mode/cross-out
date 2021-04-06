@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Cross out / Cancel
+# key: cross
+# condition: t
+# --
+\cancel{$0}

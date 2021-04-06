@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Leqslant
+# key: <=
+# condition: t
+# --
+\leqslant $0

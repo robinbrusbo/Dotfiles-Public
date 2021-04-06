@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Enumerate Alphabet
+# key: enumalpha
+# condition: t                
+# --
+\begin{enumerate}[label=(\alph*)]
+    \item $0
+\end{enumerate}

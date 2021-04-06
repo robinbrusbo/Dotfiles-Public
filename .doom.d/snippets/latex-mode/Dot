@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Just a single dot
+# key: dot
+# condition: t
+# --
+\cdot $0

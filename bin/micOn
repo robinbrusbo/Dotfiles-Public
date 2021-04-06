@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+pactl load-module module-loopback latency_msec=1
+
+read -p "press ENTER to quit "
+
+pactl unload-module module-loopback

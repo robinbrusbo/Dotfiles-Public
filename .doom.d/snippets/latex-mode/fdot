@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: filled dot
+# key: fdot
+# condition: t
+# --
+\bullet $0

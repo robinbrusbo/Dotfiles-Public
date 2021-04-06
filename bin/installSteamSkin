@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+# Colors
+red="\e[0;31m"
+green="\e[0;32m"
+
+# Remove current version
+rm -rf ~/.steam/steam/skins/Metro
+
+# Create work directory
+mkdir ~/.cache/steamSkin
+cd ~/.cache/steamSkin
+
+# Metro skin + patches
+wget https://github.com/hyoretsu/Ultimate-Steam-Dark-Mode-Skin/archive/refs/heads/master.zip
+unzip master.zip
+rm master.zip
+mv Ultimate-Steam-Dark-Mode-Skin-master/skins/Metro\ for\ Steam/ Metro
+
+# Zoom in
+echo " " >>Metro/resource/webkit.css
+echo ":root { zoom: 1.05; }" >>Metro/resource/webkit.css
+
+# Library theme
+wget https://github.com/AikoMidori/steam-library/archive/refs/heads/master.zip
+unzip master.zip
+rm master.zip
+
+## Text to navigate in file
+echo " " >>Metro/resource/webkit.css
+echo "/* LIBRARY THEME */" >>Metro/resource/webkit.css
+
+## Concatenate the different files (order of files matter)
+cd steam-library-master
+cat config.css css/GamePage.css css/Library.css css/MiniProfile.css css/SideBar.css css/Scrollbar.css css/Properties.css css/MusicLibrary.css >>tmp.css
+grep -v '^/' tmp.css >webkit.css
+rm tmp.css
+grep -v '^/' libraryroot.custom.css >tmp.css
+grep -v '^@' tmp.css >>webkit.css
+cd ..
+
+## Append to the skin
+echo "$(<steam-library-master/webkit.css)" >>Metro/resource/webkit.css
+rm -rf steam-library-master
+
+# Friends theme
+echo "/* FRIENDS THEME */" >>Metro/resource/webkit.css
+echo
+echo -e $red"FRIENDS WARNING:"
+echo -e $red"ADD FRIENDS THEME TO WEBKIT.CSS FROM https://steamchatskinning.tk/"
+echo -e $red"RUN THE FOLLOWING COMMAND AFTER DOWNLOADING THE FRIENDS SKIN"
+echo -e $green'echo "$(<~/Downloads/webkit.css)" >>~/.steam/steam/skins/Metro/resource/webkit.css'
+
+# Move the skin to steam
+mv Metro ~/.steam/steam/skins/Metro
+
+# Finalize
+cd ~
+rm -rf ~/.cache/steamSkin

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Absolute Value
+# key: abs
+# condition: t
+# --
+\abs{${1:}}

@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Competitive Programming Template
+# key: cp
+# condition: t              
+# --
+from sys import stdin, stdout
+
+
+def get_int():
+    return int(stdin.readline().strip())
+
+
+def get_string():
+    return stdin.readline().strip()
+
+
+def get_ints():
+    return map(int, stdin.readline().strip().split())
+
+
+def get_count(val):
+    return map(stdin.readline().count, (val))
+
+
+def main():
+    write = stdout.write
+    ${1:n = get_int()}
+    $0
+    pass
+
+
+if __name__ == '__main__':
+   main()

@@ -1,0 +1,2 @@
+#!/bin/bash
+python ~/Sync/Programming/Scripts/BeatmapMover/mapmover.py & gamemoderun osu-wine

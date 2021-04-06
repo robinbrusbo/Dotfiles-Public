@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Exempel
+# key: ex
+# condition: t
+# --
+\begin{exempel}
+  $0
+\end{exempel}

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Mathcal
+# key: mcal
+# condition: t
+# --
+\mathcal{${1:}}

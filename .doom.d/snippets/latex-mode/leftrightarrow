@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: leftrightarrow
+# key: <->
+# condition: t
+# --
+\leftrightarrow $0

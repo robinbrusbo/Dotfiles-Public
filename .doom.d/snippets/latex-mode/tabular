@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: tabular
+# key: tab
+# condition: t
+# --
+\begin{center}
+  \begin{tabular}{${1:| c | c | c |}}
+    $0
+  \end{tabular}
+\end{center}

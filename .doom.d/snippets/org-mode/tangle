@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: tangle
+# uuid: tangle
+# key: tangle
+# condition: t 
+# --
+#+PROPERTY: header-args :tangle ${1:file}

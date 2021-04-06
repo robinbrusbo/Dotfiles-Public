@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Notation
+# key: not
+# condition: t
+# --
+\begin{notation}
+  $0
+\end{notation}

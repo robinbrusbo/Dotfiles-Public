@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# JAVA AND JAVAFX
+# Compiles and runs a single java file
+
+file=$1
+file="${file%%.*}"
+
+javac --module-path /usr/lib/jvm/default/lib --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media $file.java
+java --module-path /usr/lib/jvm/default/lib --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media $file
+
+find . -name '*.class' -delete

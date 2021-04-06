@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: underlined
+# key: unde
+# condition: t
+# --
+_$1_$0

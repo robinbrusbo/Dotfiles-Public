@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Over right arrow for vectors
+# key: arr
+# condition: t
+# --
+\overrightarrow{$0}

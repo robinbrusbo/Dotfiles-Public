@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Anmärkning
+# key: anm
+# condition: t
+# --
+\begin{anmarkning}
+  $0
+\end{anmarkning}

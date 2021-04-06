@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+sudo systemctl restart NetworkManager.service NetworkManager-dispatcher.service NetworkManager-wait-online.service

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Inkscape Figure
+# key: ink
+# condition: t  
+# --
+\begin{figure}[ht]
+    \centering
+    \inkfig{$1}
+    \caption{$2}
+\end{figure}

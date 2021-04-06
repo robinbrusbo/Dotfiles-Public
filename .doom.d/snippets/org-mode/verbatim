@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: verbatim
+# key: verb
+# condition: t
+# --
+=$1=$0

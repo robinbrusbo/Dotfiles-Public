@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Text Color
+# key: color
+# condition: t                
+# --
+\textcolor{${1:color}}{\text{${2:text}}}

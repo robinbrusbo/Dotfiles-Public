@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# set -euo pipefail <<<< breaks the code?
+
+# TODO if preferable change so the colors are based on the repository
+
+orange="\e[0;33m"
+
+yay -Ss $1 >>tmpSearch
+cat tmpSearch | ~/bin/scripts/alternateColors.sh
+if [ ! -z $2 ]; then
+	echo ""
+	echo -e $orange"Keyword search found:"
+	cat tmpSearch | grep -iFB 1 $2
+fi
+rm ~/tmpSearch

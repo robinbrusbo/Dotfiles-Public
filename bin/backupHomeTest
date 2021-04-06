@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+rsync -naP -rtv --exclude-from=/home/$USER/misc/rsync-ignoreFiles.txt /home/$USER /home/$USER/backup/$(date +%Y-%m)

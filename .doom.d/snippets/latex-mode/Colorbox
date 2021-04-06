@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Colorbox
+# key: colorbox
+# condition: t
+# --
+\colorbox{${1:color}}{\text{${2:text}}}

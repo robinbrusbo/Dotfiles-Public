@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: hat for a variable
+# key: hat
+# condition: t
+# --
+\bar{$0}

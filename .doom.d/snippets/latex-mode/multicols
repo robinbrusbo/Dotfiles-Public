@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Multicols
+# key: col
+# condition: t              
+# --
+\begin{center}
+  \begin{multicols}{${1:2}}
+    $0
+  \end{multicols}
+\end{center}

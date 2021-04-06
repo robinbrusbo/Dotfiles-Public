@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Box
+# key: box
+# condition: t           
+# --
+\begin{tcolorbox}[title=$1]
+   $0
+\end{tcolorbox}

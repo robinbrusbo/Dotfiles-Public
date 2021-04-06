@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Mapsto Arrow
+# key: |->
+# condition: t
+# --
+\mapsto $0

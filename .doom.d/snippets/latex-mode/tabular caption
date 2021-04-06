@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Tabular caption
+# key: tabcap
+# condition: t                     
+# --
+\begin{table}[H]
+  \centering
+  \begin{tabular}{${1:| c | c | c |}}
+     $2
+  \end{tabular}
+  \caption{$3}
+\end{table}

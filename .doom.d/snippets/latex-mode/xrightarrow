@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: x Rightarrow
+# key: x->
+# condition: t     
+# --
+\xrightarrow{$1}{$2}

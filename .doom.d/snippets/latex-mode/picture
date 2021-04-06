@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Picture
+# key: pic
+# condition: t
+# --
+\begin{figure}[H]
+  \centering \includegraphics[width=$1\textwidth]{graphics/$2.png}
+\end{figure}

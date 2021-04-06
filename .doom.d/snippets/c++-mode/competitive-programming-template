@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Competitive Programming Template
+# key: cp
+# condition: t                
+# --
+#include <bits/stdc++.h>
+using namespace std;
+#define rep(i, a, n) for (int i = a; i < n; i++)
+#define per(i, a, n) for (int i = n - 1; i >= a; i--)
+#define trav(i, n)   for (auto &i : n)
+#define rm(s, c)     remove(begin(s), end(s), c), end(s)
+#define all(x)       begin(x), end(x)
+#define sz(x)        (int)(x).size()
+#define mp           make_pair
+#define pb           push_back
+#define fi           first
+#define se           second
+typedef long long ll;
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+const ll mod = 1000000007;
+// END
+
+void solve() {
+     $0
+}
+
+int main() {
+    cin.tie(0)->sync_with_stdio(0);
+    cin.exceptions(cin.failbit);
+    solve();
+    return 0;
+}
