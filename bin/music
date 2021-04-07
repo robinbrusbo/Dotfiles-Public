@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+printf "What kind of music would you fancy today?\n"
+printf "Choices: nationalist, hårdsten, 10sMetal, lofi, sexy, russian, topSongs20\n"
+
+read genre
+
+printf "\n"
+
+case $genre in
+
+nationalist)
+	chromium https://open.spotify.com/playlist/7lCiLmY4QyGDHLsbRTGZFf &
+	clear
+	notify-send "Alright, you fucking sverigedemokrat"
+	;;
+
+hårdsten)
+	chromium https://open.spotify.com/playlist/6xqd0EwzOZRTlhoT2sOhKw &
+	clear
+	notify-send "Ye boii som swedish hard rock, go hard!"
+	;;
+
+10sMetal)
+	chromium https://open.spotify.com/playlist/37i9dQZF1DWUnhhRs5u3TO &
+	clear
+	notify-send "Oooh that's some real shit"
+	;;
+
+lofi)
+	chromium https://open.spotify.com/playlist/2qwNKbXDczFxqss8DYDTE3 &
+	clear
+	notify-send "Have fun studying! Remember that to be in the top 1% you have to be willing to do what the other 99% aren't."
+	;;
+
+sexy)
+	chromium https://open.spotify.com/playlist/3XkPFfjnrnn4A4hN8rBvFv &
+	clear
+	notify-send "Feelin' sexy? I don't blame ya"
+	;;
+
+russian)
+	chromium https://open.spotify.com/playlist/6gZ5JCanXpWS2E4JebQ8sV &
+	clear
+	notify-send "Putin would be proud"
+	;;
+
+topSongs20)
+	chromium https://open.spotify.com/playlist/37i9dQZF1EM7a0PpZ2pGsE &
+	clear
+	notify-send "Really?"
+	;;
+
+*)
+	printf "Nah, sorry, I can't play that bro\n"
+	;;
+esac
+
+killall -9 kitty
