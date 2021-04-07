@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+xinput set-prop "pointer:Logitech G305" "libinput Accel Speed" 0
+xinput set-prop "pointer:Logitech G305" "libinput Accel Profile Enabled" 0, 1
+
+echo "Cursor movement has been fixed"

@@ -175,9 +175,13 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id "i3-msg 'workspace 2; exec discord'"
 exec --no-startup-id dunst
 exec --no-startup-id "i3-msg 'workspace 2; exec chromium https://calendar.google.com/calendar/u/0/r?pli=1'"
+exec --no-startup-id ~/bin/remindAnki.sh
 
 # Open Activity/Task Manager
 bindsym $mod+Control+Delete exec --no-startup-id kitty --single-instance bpytop
+
+# Open xkill
+bindsym --release $mod+Shift+Control+q exec --no-startup-id xkill
 
 # Open Ranger
 bindsym $mod+r exec --no-startup-id "kitty --single-instance ranger"
