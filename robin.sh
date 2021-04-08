@@ -12,6 +12,7 @@ yay -S --noconfirm zoom
 yay -S --noconfirm polychromatic
 yay -S --noconfirm xf86-input-wacom
 yay -S --noconfirm pavucontrol
+yay -S --noconfirm ddnet
 
 # auto login
 # ändra också marhaba /etc/lightdm/lightdm.conf owo
