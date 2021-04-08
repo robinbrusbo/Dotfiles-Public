@@ -4,9 +4,9 @@
 Big thanks to muslim tech support Mr. Abdulhussein for fulfilling my wet dreams of having a juicy Arch linux setup AND making it easy to install again should my computer decide to say fuck you to me.
 
 * To do
-** Make script to toggle vsync on/off for browsing/gaming respectively
-** Fix controller not working sometimes
-** Make script to toggle polybar on/off on main screen (default: off)
-** Autostart the following packages
+[] Make script to toggle vsync on/off for browsing/gaming respectively
+[] Fix controller not working sometimes
+[] Make script to toggle polybar on/off on main screen (default: off)
+[] Autostart the following packages
 *** Left monitor: calendar
 *** Right monitor: discord, steam
