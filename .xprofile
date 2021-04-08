@@ -1,5 +1,5 @@
 # Two monitors
-xrandr --output DVI-D-0 --mode 1920x1080 --rate 144 --auto --primary --output HDMI-0 --rate 60 --auto --right-of DVI-D-0
+xrandr --output DVI-D-0 --mode 1920x1080 --rate 144 --auto --primary --output HDMI-0 --rate 60 --auto --left-of DVI-D-0 --output DP-0 --rate 60 --auto --right-of DVI-D-0
 
 # Temporary file with xinput list
 echo $(xinput list) >> tmp
