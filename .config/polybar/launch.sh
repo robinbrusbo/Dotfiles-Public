@@ -24,14 +24,20 @@ else
 	export HWMON_PATH=/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
 fi
 
-# polybar bar on both monitors
-if type "xrandr"; then
-	for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-		MONITOR=$m polybar --reload main -c "$DIR"/config.ini &
-	done
-else
-	polybar --reload main -c "$DIR"/config.ini &
-fi
+# Polybar on all monitors except for middle
+
+MONITOR="DP-0" polybar --reload main -c "$DIR"/config.ini &
+MONITOR="HDMI-0" polybar --reload main -c "$DIR"/config.ini &
+
+# Polybar on ALL monitors
+
+# if type "xrandr"; then
+# 	for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+# 		MONITOR=$m polybar --reload main -c "$DIR"/config.ini &
+# 	done
+# else
+# 	polybar --reload main -c "$DIR"/config.ini &
+# fi
 
 # Launch the bar
 # polybar -q main -c "$DIR"/config.ini &
