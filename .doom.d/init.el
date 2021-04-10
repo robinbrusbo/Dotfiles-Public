@@ -84,12 +84,12 @@
        ;;term              ; basic terminal emulator for Emacs
        vterm               ; the best terminal emulation in Emacs
 
-       :checkers
-       syntax              ; tasing you for every semicolon you forget
-       (spell              ; tasing you for misspelling mispelling
-        +flyspell
-        +hunspell)
-       grammar             ; tasing grammar mistake every you make
+       ;; syntax              ; tasing you for every semicolon you forget
+       ;; (spell              ; tasing you for misspelling mispelling
+       ;;  +flyspell
+       ;;  +hunspell)
+       ;; grammar
+                                        ; tasing grammar mistake every you make
 
        :tools
        ;;ansible

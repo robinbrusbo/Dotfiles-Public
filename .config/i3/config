@@ -172,7 +172,7 @@ bindsym $mod+Pause exec killall picom && betterlockscreen -l dim && picom -b &
 
 # Autostart
 exec --no-startup-id blueman-applet
-exec --no-startup-id "i3-msg 'workspace 2; exec discord'"
+exec --no-startup-id "i3-msg 'workspace 3; exec discord'"
 exec --no-startup-id dunst
 exec --no-startup-id "i3-msg 'workspace 2; exec chromium https://calendar.google.com/calendar/u/0/r?pli=1'"
 exec --no-startup-id ~/bin/remindAnki.sh
