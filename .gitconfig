@@ -1,3 +1,6 @@
 [user]
-	email = robinbrusbo@gmail.com
-	name = robinbrusbo
+    name = robinbrusbo
+    email = robinbrusbo@gmail.com
+[credential "https://github.com/"]
+    username = robinbrusbo
+    helper = cache --timeout=7200
