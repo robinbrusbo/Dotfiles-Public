@@ -194,7 +194,7 @@ for_window [title="Emacs Everywhere"] floating enable
 bindsym $mod+e exec --no-startup-id "emacsclient --eval '(emacs-everywhere)'"
 
 # Automatic tiling
-exec_always --no-startup-id autotiling
+exec_always --no-startup-id ~/.config/i3/scripts/i3-auto-layout
 
 # Status bar
 exec --no-startup-id "bash ~/.config/polybar/launch.sh"
@@ -204,8 +204,3 @@ exec --no-startup-id "python ~/.config/i3/scripts/redshift.py"
 
 # Turn off urgent notifications after autostart
 exec_always --no-startup-id $HOME/.config/i3/scripts/urgentOff.sh
-
-# Fade animation
-
-
-# Rounded corners
