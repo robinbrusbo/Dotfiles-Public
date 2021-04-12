@@ -13,6 +13,10 @@ yay -S --noconfirm polychromatic
 yay -S --noconfirm xf86-input-wacom
 yay -S --noconfirm pavucontrol
 yay -S --noconfirm ddnet
+yay -S --noconfirm cmake
+yay -S --noconfirm zathura zathura-pdf-poppler
+yay -S --noconfirm ansiweather
+yay -S --noconfirm flatpak
 
 # auto login
 # ändra också marhaba /etc/lightdm/lightdm.conf owo
