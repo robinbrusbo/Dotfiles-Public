@@ -8,3 +8,4 @@ Big thanks to muslim tech support Mr. Abdulhussein for fulfilling my wet dreams 
 - Fix controller not working sometimes
 - Make script to toggle polybar on/off on main screen (default: off)
 - Autostart packages
+- Make clamav script
