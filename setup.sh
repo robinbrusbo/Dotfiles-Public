@@ -45,19 +45,19 @@ yay -S --noconfirm rsync grsync
 yay -S --noconfirm timeshift
 
 # Sync files between computers
-yay -S --noconfirm syncthing
-sudo systemctl enable syncthing@$USER.service
+# yay -S --noconfirm syncthing
+# sudo systemctl enable syncthing@$USER.service
 
 yay -S --noconfirm bluez bluez-utils blueman
 sudo systemctl enable bluetooth.service
 
-yay -S --noconfirm firefox
+# yay -S --noconfirm firefox
 
 yay -S --noconfirm flameshot simplescreenrecorder peek vlc
 
 # Create screenshots directory if it doesn't exist
 if [ -z "$(ls -A $HOME/Pictures/Wallpapers)" ]; then
-    mkdir -p $HOME/Pictures/Screenshots
+	mkdir -p $HOME/Pictures/Screenshots
 fi
 
 # In case the video size gets a bit big...
@@ -67,16 +67,16 @@ yay -S --noconfirm handbrake
 yay -S --noconfirm cheese
 
 # Alternative to paint.net
-yay -S --noconfirm pinta
+# yay -S --noconfirm pinta
 
 # Noise suppression
 yay -S --noconfirm noisetorch-bin
 
 # Taking pictures in org-mode
-yay -S --noconfirm scrot
+# yay -S --noconfirm scrot
 
 # Download videos
-yay -S --noconfirm clipgrab
+# yay -S --noconfirm clipgrab
 
 # Configure mouse settings
 yay -S --noconfirm piper
@@ -117,7 +117,7 @@ yay -S --noconfirm zathura zathura-pdf-poppler
 
 # Set A4 as default papersize
 if [[ ! $updating =~ ^[Yy]$ ]]; then
-    echo 'a4' | sudo tee -a /etc/papersize
+	echo 'a4' | sudo tee -a /etc/papersize
 fi
 
 # Libreoffice, Microsoft Office but for Linux!
@@ -127,10 +127,10 @@ yay -S --noconfirm dunst
 
 # Fonts take long to install, only needed once
 if [[ ! $updating =~ ^[Yy]$ ]]; then
-    # Windows fonts
-    yay -S --noconfirm ttf-ms-win10-auto
-    # Patched fonts for ranger and other stuff
-    yay -S --noconfirm nerd-fonts-complete
+	# Windows fonts
+	yay -S --noconfirm ttf-ms-win10-auto
+	# Patched fonts for ranger and other stuff
+	yay -S --noconfirm nerd-fonts-complete
 fi
 yay -S --noconfirm wqy-zenhei ttf-jetbrains-mono ttf-hack ttf-font-awesome
 
@@ -172,9 +172,9 @@ cp /usr/share/doc/betterlockscreen/examples/betterlockscreenrc $HOME/.config
 
 # If your Pictures/Wallpapers folder is empty, download a wallpaper
 if [ -z "$(ls -A $HOME/Pictures/Wallpapers)" ]; then
-    mkdir -p $HOME/Pictures/Wallpapers
-    yay -S --noconfirm curl wget
-    curl https://images.wallpaperscraft.com/image/deer_art_vector_134088_1920x1080.jpg > $HOME/Pictures/Wallpapers/deer_art_vector_1920x1080.jpg
+	mkdir -p $HOME/Pictures/Wallpapers
+	yay -S --noconfirm curl wget
+	curl https://images.wallpaperscraft.com/image/deer_art_vector_134088_1920x1080.jpg >$HOME/Pictures/Wallpapers/deer_art_vector_1920x1080.jpg
 fi
 
 # Sets lockscreen
@@ -194,16 +194,16 @@ yay -S --noconfirm soundux
 yay -S --noconfirm signal-desktop
 
 # Fun typing game
-yay -S --noconfirm typespeed
+# yay -S --noconfirm typespeed
 
 # I use arch btw
 yay -S --noconfirm neofetch
 
 # Color text with lolcat =w=
-yay -S --noconfirm lolcat
+# yay -S --noconfirm lolcat
 
 # Inspiring quotes for the day
-yay -S --noconfirm cowfortune
+# yay -S --noconfirm cowfortune
 
 # yay -S --noconfirm mpd mopidy mopidy-spotify mopidy-mpd ncmpcpp
 
@@ -254,7 +254,7 @@ yay -S --noconfirm bpytop
 # Shell
 yay -S --noconfirm zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions
 if [[ ! $updating =~ ^[Yy]$ ]]; then
-    # Make zsh main shell
+	# Make zsh main shell
 	chsh -s /bin/zsh
 fi
 
@@ -323,8 +323,8 @@ yay -S --noconfirm deluge deluge-gtk
 yay -S --noconfirm xorg
 
 if [[ $laptop =~ ^[Yy]$ ]]; then
-    yay -S --noconfirm tlp powertop
-    sudo systemctl enable tlp.service
+	yay -S --noconfirm tlp powertop
+	sudo systemctl enable tlp.service
 fi
 
 if [[ $gaming =~ ^[Yy]$ ]]; then
@@ -333,7 +333,7 @@ if [[ $gaming =~ ^[Yy]$ ]]; then
 	yay -S --noconfirm gamemode lib32-gamemode
 	yay -S --noconfirm protontricks
 	yay -S --noconfirm obs-studio
-	yay -S --noconfirm lutris
+	# yay -S --noconfirm lutris
 	yay -S --noconfirm wine-staging winetricks
 	# make cpu run at perfomance mode
 	yay -S --noconfirm cpupower
@@ -342,10 +342,30 @@ if [[ $gaming =~ ^[Yy]$ ]]; then
 	yay -S --noconfirm mangohud lib32-mangohud
 	# fps limiter
 	yay -S --noconfirm libstrangle-git
-    if [[ ! $updating =~ ^[Yy]$ ]]; then
-        echo "*                hard    nofile          1048576" | sudo tee -a /etc/security/limits.conf
-        echo "*                soft    nofile          1048576" | sudo tee -a /etc/security/limits.conf
-    fi
+	if [[ ! $updating =~ ^[Yy]$ ]]; then
+		echo "*                hard    nofile          1048576" | sudo tee -a /etc/security/limits.conf
+		echo "*                soft    nofile          1048576" | sudo tee -a /etc/security/limits.conf
+	fi
 fi
 
-$HOME/bin/clearCache; $HOME/bin/clearOrphans
+$HOME/bin/clearCache
+$HOME/bin/clearOrphans
+
+# Misc packages
+yay -S --noconfirm gimp
+yay -S --noconfirm anki
+yay -S --noconfirm droidcam
+yay -S --noconfirm chromium
+yay -S --noconfirm ksysguard
+yay -S --noconfirm zoom
+yay -S --noconfirm polychromatic
+yay -S --noconfirm xf86-input-wacom
+yay -S --noconfirm pavucontrol
+yay -S --noconfirm cmake
+yay -S --noconfirm zathura zathura-pdf-poppler
+yay -S --noconfirm ansiweather
+
+# To fix auto login
+# sudo groupadd -r autologin
+# sudo gpasswd -a robban autologin
+# Also change /etc/lightdm/lightdm.conf
